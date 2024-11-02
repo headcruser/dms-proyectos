@@ -1,5 +1,5 @@
 <script setup>
-import logo from '@/img/fuego-bites.png';
+import logo from '@/img/logo.png';
 
 import { usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';

@@ -14,7 +14,7 @@
             <div class="col-12">
                 <section class="my-5 text-center">
                     <div class="d-flex justify-content-center pb-4">
-                        <img style="width: 85px" src="{{ Vite::asset('resources/js/img/fuego-bites.png') }}">
+                        <img style="width: 85px" src="{{ Vite::asset('resources/js/img/logo.png') }}">
                     </div>
 
                     <h1 class="display-1">@yield('code')</h1>

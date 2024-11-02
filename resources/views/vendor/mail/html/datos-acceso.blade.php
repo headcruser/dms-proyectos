@@ -11,7 +11,7 @@ Se ha creado una cuenta para ti en <b>{{config('app.name')}}</b>:
 @endcomponent
 
 
-@component('mail::button', ['url' => route('ventas.registro.index')])
+@component('mail::button', ['url' => route('home')])
 Ingresar al Sistema
 @endcomponent
 

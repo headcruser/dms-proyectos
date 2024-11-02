@@ -1,9 +1,9 @@
-<p align="center"><img src="resources/js/img/fuego-bites.png" style="width:100px;height:100px"></p>
+<p align="center"><img src="resources/js/img/logo.png" style="width:100px;height:100px"></p>
 
 
-# Fuego bites
+# DMS PROYECTOS
 
-Proyecto administrativo punto de venta para el registro de producto.
+Herramienta personal para gestionar proyectos.
 
 ## Como instalar el proyecto
 

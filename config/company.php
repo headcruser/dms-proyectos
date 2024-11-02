@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'name'  => 'Fuego Bites',
-    'web'   => 'www.fuego-bites.com',
+    'name'  => 'DMS Proyectos',
+    'web'   => 'www.dms-jales.com',
 ];

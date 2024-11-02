@@ -31,7 +31,7 @@ import moment from "moment";
 
 import { useForm ,router} from "@inertiajs/vue3";
 
-import logotipo from '@/img/fuego-bites.png';
+import logotipo from '@/img/logo.png';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 import VueMultiselect from 'vue-multiselect'

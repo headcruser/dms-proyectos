@@ -1,8 +1,8 @@
 {
-    "name": "headcruser/fuego-bites",
+    "name": "headcruser/dms-proyectos",
     "type": "project",
-    "description": "Panel administrativo fuego bites.",
-    "keywords": ["framework", "laravel","Fuego bites","vue"],
+    "description": "Gestion de proyectos dms jales.",
+    "keywords": ["framework", "laravel","Dms jales","vue"],
     "license": "MIT",
     "require": {
         "php": "^8.0.2",

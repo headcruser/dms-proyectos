@@ -53,71 +53,7 @@
               <h5 class="text-center fw-bold mb-6">
                 <i class="fas fa-fire me-2 text-danger"></i> Productos
               </h5>
-              @foreach ($productos->chunk(3) as $chunk)
-                <div class="row gx-xl-5 justify-content-center pb-5">
-                  @foreach ($chunk as $producto)
-                    <div class="col-lg-3 col-12 mb-4 mb-xl-0">
 
-                        <!-- Product card -->
-                        <div class="text-center">
-                          <!-- Product image -->
-                          <div class="
-                                      bg-image
-                                      ripple
-                                      shadow-4
-                                      rounded-6
-                                      mb-4
-                                      overflow-hidden
-                                      d-block
-                                      "
-                              data-ripple-color="light"
-                              >
-                              <img
-                                  src="{{ $producto->imagen ?? $defaultProducto }}"
-                                  alt="producto_{{ $producto->id }}"
-                                  class="w-100"
-                                  style="width: 300px;height: 250px;"
-                              />
-                              <a href="#!">
-                                  <div class="mask" stye>
-                                      <div
-                                          class="
-                                                  d-flex
-                                                  justify-content-start
-                                                  align-items-end
-                                                  h-100
-                                                  p-3
-                                                  "
-                                          >
-                                      <span class="badge badge-success rounded-pill">{{ $producto->codigo }}</span
-                                          >
-                                      </div>
-                                  </div>
-                                  <div class="hover-overlay">
-                                      <div
-                                          class="mask"
-                                          style="background-color: hsla(0, 0%, 98.4%, 0.09)">
-                                      </div>
-                                  </div>
-                              </a>
-                          </div>
-
-                          <!-- Product content -->
-                          <a href="" class="px-3 text-reset d-block">
-                              <p class="fw-bold mb-2">{{ $producto->nombre }}</p>
-                              <p class="text-muted mb-2">{{ $producto->descripcion }}</p>
-
-                              <h5 class="mb-2">
-                                  <span class="align-middle">$ {{ $producto->precio }}</span>
-                              </h5>
-                          </a>
-                          <!-- Product content -->
-                        </div>
-                        <!-- Product card -->
-                    </div>
-                  @endforeach
-                </div>
-              @endforeach
             </section>
             <!-- Section: PRODUCTOS -->
 

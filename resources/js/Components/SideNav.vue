@@ -14,7 +14,7 @@ MDBDropdownMenu,
 
 import { computed, ref } from "vue";
 
-import logotipo from '@/img/fuego-bites.png';
+import logotipo from '@/img/logo.png';
 import defaultImage from '@/img/default-image.png'
 
 import "primevue/resources/themes/bootstrap4-light-blue/theme.css";
@@ -102,16 +102,7 @@ const handleLinkClick = () => {
                         <span>Permisos</span>
                     </NavLink>
                 </MDBSideNavItem>
-                <MDBSideNavItem>
-                    <NavLink
-                        v-if="userPermissions.includes('gestionar_productos')"
-                        :href="route('admin.productos.index')"
-                        :active="route().current('admin.productos.*')"
-                        @click="handleLinkClick">
-                        <MDBIcon icon="box" class="fa-fw me-3"></MDBIcon>
-                        <span>Productos</span>
-                    </NavLink>
-                </MDBSideNavItem>
+
 
                 <MDBSideNavItem>
                     <NavLink
@@ -134,49 +125,6 @@ const handleLinkClick = () => {
                         @click="handleLinkClick">
                         <MDBIcon icon="book" class="fa-fw me-3"></MDBIcon>
                         <span>Cotizaciones</span>
-                    </NavLink>
-                </MDBSideNavItem>
-
-                <MDBSideNavItem>
-                    <NavLink
-                        v-if="userPermissions.includes('registrar_pedido')"
-                        :href="route('ventas.registro.index')"
-                        :active="route().current('ventas.registro.*')"
-                        @click="handleLinkClick">
-                        <MDBIcon icon="book" class="fa-fw me-3"></MDBIcon>
-                        <span>Registrar pedido</span>
-                    </NavLink>
-                </MDBSideNavItem>
-
-
-                <MDBSideNavItem>
-                    <NavLink
-                        v-if="userPermissions.includes('pedidos_por_hacer')"
-                        :href="route('ventas.pedidos.index')"
-                        :active="route().current('ventas.pedidos.*')"
-                        @click="handleLinkClick">
-                        <MDBIcon icon="industry" class="fa-fw me-3"></MDBIcon>
-                        <span>Pedidos por hacer</span>
-                    </NavLink>
-                </MDBSideNavItem>
-
-                <MDBSideNavItem>
-                    <NavLink
-                        v-if="userPermissions.includes('reporte_mensual')"
-                        :href="route('ventas.reporte.index')"
-                        :active="route().current('ventas.reporte.*')"
-                        @click="handleLinkClick">
-                        <MDBIcon icon="chart-line" class="fa-fw me-3"></MDBIcon>
-                        <span>Reporte Ventas</span>
-                    </NavLink>
-                </MDBSideNavItem>
-
-                <hr />
-
-                <MDBSideNavItem>
-                    <NavLink :href="route('about')" :active="route().current('about')" @click="handleLinkClick">
-                        <MDBIcon icon="info-circle" class="fa-fw me-3"></MDBIcon>
-                        <span>Acerca de </span>
                     </NavLink>
                 </MDBSideNavItem>
             </MDBSideNavMenu>

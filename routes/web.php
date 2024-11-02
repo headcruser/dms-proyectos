@@ -64,12 +64,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ])->names('perms');
         });
 
-
-        # NOTE: PRODUCTOS
-        Route::resource('productos', ProductosController::class)->parameters([
-            'productos' => 'producto'
-        ])->names('productos');
-
         # NOTE: CLIENTES
         Route::prefix('clientes')
             ->name('clientes.')
@@ -105,33 +99,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->names('cotizaciones')
             ->except('store');
 
-
-        # NOTE: REGISTRO PEDIDOS
-        Route::prefix('registro')
-            ->name('registro.')
-            ->controller(RegistroPedidosController::class)
-            ->group(function () {
-                Route::get('/', 'index')->name('index');
-                Route::post('/', 'store')->name('store');
-                Route::put('{venta}', 'update')->name('update');
-                Route::delete('{venta}', 'destroy')->name('destroy');
-            });
-
-
-        # NOTE: VER REGISTROS PENDIENTES
-        Route::name('pedidos.')
-            ->prefix('pedidos')
-            ->controller(PedidosPendientesController::class)
-            ->group(function () {
-                Route::get('/', 'index')->name('index');
-            });
-
-        # NOTE: VER REPORTE DE VENTAS
-        Route::name('reporte.')
-            ->prefix('reporte')
-            ->controller(ReporteVentaController::class)
-            ->group(function () {
-                Route::get('/', 'index')->name('index');
-            });
     });
 });

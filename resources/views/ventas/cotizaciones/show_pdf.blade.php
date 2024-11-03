@@ -11,7 +11,7 @@
     <table class="w-full">
         <tr>
             <td class="w-half">
-                <img src="{{ asset('img/logo.png') }}" alt="Fuego Bites" width="75" />
+                <img src="{{ asset('img/logo.png') }}" alt="{{ config('app.name') }}" width="75" />
             </td>
             <td class="w-half text-end">
                 <h2>{{ config('company.name') }}</h2>

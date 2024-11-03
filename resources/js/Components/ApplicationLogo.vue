@@ -9,9 +9,6 @@ const appName = computed(() =>  usePage().props.appName);
 
 <template>
     <div>
-        <img :src="logo" style="width: 10rem;height: 10rem;">
-    </div>
-    <div>
-        <span class="text-muted"> {{ appName }} </span>
+        <img :title="appName" :src="logo" style="width: 10rem;height: 10rem;">
     </div>
 </template>

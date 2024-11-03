@@ -20,9 +20,7 @@ import { Link } from '@inertiajs/vue3'
         <MDBCard>
           <MDBCardBody>
             <div class="pb-4 text-center">
-                <Link href="/" >
-                    <ApplicationLogo />
-                </Link>
+                <ApplicationLogo />
             </div>
 
             <slot />

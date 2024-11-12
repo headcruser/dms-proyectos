@@ -154,6 +154,7 @@ class CotizacionesController extends Controller
         $partida->fill([
             'concepto'      => $request->input('concepto'),
             'descripcion'   => $request->input('descripcion'),
+            'posicion'      => $request->input('posicion'),
             'cantidad'      => $request->input('cantidad'),
             'precio'        => $request->input('precio'),
             'total'         => $request->input('cantidad') * $request->input('precio'),

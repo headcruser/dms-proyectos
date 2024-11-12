@@ -73,6 +73,7 @@ const formAddPartida = useForm({
 const formEditarPartida = useForm({
     id_partida: 0,
     concepto: '',
+    posicion: 0,
     descripcion:'',
     cantidad:'',
     precio: '',
@@ -142,6 +143,7 @@ const evtAgregarPartida = ($evt) => {
 
 const evtShowEditPartida = async (partida) => {
     formEditarPartida.id_partida = partida.id,
+    formEditarPartida.posicion = partida.posicion,
     formEditarPartida.concepto = partida.concepto;
     formEditarPartida.descripcion = partida.descripcion;
     formEditarPartida.cantidad = partida.cantidad;
@@ -379,15 +381,15 @@ const evtClickEnviarCotizacion = async () => {
                             <thead>
                                 <tr>
                                     <th class="text-center bg-primary text-white" style="width:120px">Acciones</th>
-                                    <th class="text-center bg-primary text-white">Partida</th>
+                                    <th class="text-center bg-primary text-white">#</th>
                                     <th class="text-center bg-primary text-white">Concepto</th>
                                     <th class="text-center bg-primary text-white">Cantidad</th>
-                                    <th class="text-center bg-primary text-white text-nowrap ">Precio Unitario</th>
+                                    <th class="text-center bg-primary text-white text-nowrap ">Precio</th>
                                     <th class="text-center bg-primary text-white">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="partida in cotizacion.partidas" :key="partida.id">
+                                <tr v-for="partida in _.orderBy(cotizacion.partidas,['posicion'],['asc'])" :key="partida.id">
                                     <td class="text-nowrap">
                                         <MDBBtn outline="primary"
                                             title="editar"
@@ -413,16 +415,16 @@ const evtClickEnviarCotizacion = async () => {
                                         <p class="text-muted mb-0">{{ partida.descripcion }}</p>
                                     </td>
                                     <td class="text-center">{{ partida.cantidad }}</td>
-                                    <td class="text-end">{{ partida.precio }}</td>
-                                    <td class="text-end">{{ partida.total }}</td>
+                                    <td class="text-end">{{ Intl.NumberFormat('es-MX').format(partida.precio) }}</td>
+                                    <td class="text-end">{{ Intl.NumberFormat('es-MX').format(partida.total) }}</td>
                                 </tr>
                             </tbody>
                             <tfoot>
 
                                 <tr style="background:#ccc">
                                     <td colspan=5 class="text-end fw-bold">Total: </td>
-                                    <td colspan=2 class="text-end bg-white">
-                                        <b>$ {{ _.sumBy(cotizacion.partidas, (partida) => Number(partida.total)) }}</b>
+                                    <td colspan=2 class="text-end bg-white text-nowrap">
+                                        <b>$ {{ Intl.NumberFormat('es-MX').format(_.sumBy(cotizacion.partidas, (partida) => Number(partida.total))) }}</b>
                                     </td>
                                 </tr>
                             </tfoot>
@@ -686,6 +688,21 @@ const evtClickEnviarCotizacion = async () => {
 
                         <div v-if="formEditarPartida.errors.descripcion" class="invalid-feedback">
                             {{ formEditarPartida.errors.descripcion }}
+                        </div>
+                    </MDBCol>
+                </MDBRow>
+
+                <MDBRow class="mb-4">
+                    <MDBCol>
+                        <MDBInput
+                          v-model.number="formEditarPartida.posicion"
+                          label="Posicion"
+                          title="Posicion"
+                          type="number"
+                          required
+                        />
+                        <div v-if="formEditarPartida.errors.posicion" class="invalid-feedback">
+                            {{ formEditarPartida.errors.posicion }}
                         </div>
                     </MDBCol>
                 </MDBRow>

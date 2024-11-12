@@ -16,6 +16,11 @@ import Swal from 'sweetalert2'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Pagination from '@/Components/Pagination.vue';
 
+import DataTable from "primevue/datatable";
+import Paginator from "primevue/paginator";
+import Column from "primevue/column";
+//import "primevue/resources/themes/bootstrap4-light-blue/theme.css";
+
 
 const props = defineProps({
     cotizaciones: Object,
@@ -82,95 +87,173 @@ const destroy = async (cotizacion)  => {
     <AuthenticatedLayout>
         <div class="mt-4 mx-4">
             <MDBCard>
-                <MDBCardHeader class="py-4 mb-3">
+                <MDBCardHeader class="bg-light">
                     <h4 class="mb-0">Cotizaciones</h4>
                 </MDBCardHeader>
-            <MDBCardBody>
-                <div class="d-flex justify-content-end mb-2">
-                    <div class="d-flex">
-                        <div class="form-outline">
-                            <MDBInput v-model="search" label="Buscar"/>
+                <MDBCardBody>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <Link
+                                as="button"
+                                type="button"
+                                className="btn btn-primary btn-sm ms-3 ripple-surface"
+                                :href="route('ventas.cotizaciones.create')"
+                            >
+                                <MDBIcon icon="plus"></MDBIcon> CREAR COTIZACION
+                            </Link>
                         </div>
 
-                        <Link
-                            as="button"
-                            type="button"
-                            className="btn btn-primary btn-sm ms-3 ripple-surface"
-                            :href="route('ventas.cotizaciones.create')"
-                        >
-                            <MDBIcon icon="plus"></MDBIcon>
-                        </Link>
+                        <div class="d-flex">
+                            <div class="form-outline">
+                                <MDBInput v-model="search" label="Buscar"/>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
 
-                <hr>
+                    <hr>
 
 
-                <MDBTable align="middle" responsive border>
-                    <thead>
-                        <tr class="bg-primary text-white">
-                            <th scope="col">#</th>
-                            <th scope="col">CLIENTE</th>
-                            <th scope="col">VENDEDOR</th>
-                            <th scope="col">FECHA</th>
-                            <th scope="col">TOTAL</th>
-                            <th scope="col">STATUS</th>
-                            <th scope="col">ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-if="cotizaciones.data.length == 0">
-                            <td colspan="7" class="text-center text-muted"> Sin Registros</td>
-                        </tr>
-
-                        <tr v-if="cotizaciones.data.length > 0" v-for="cotizacion in cotizaciones.data" :key="cotizacion.id" class="text-uppercase">
-                            <td>{{ cotizacion.id }}</td>
-                            <td >
-                                {{ cotizacion.cliente.nombre }}
-                            </td>
-                            <td>
-                                {{ cotizacion.vendedor.name }}
-                            </td>
-                            <td class="text-center">
-                                {{ cotizacion.fecha }}
-                            </td>
-
-                            <td>
-                                <div class="d-flex justify-content-between">
-                                    <span>$</span>
-                                    <span>{{ cotizacion.total }}</span>
+                    <DataTable
+                        :value="cotizaciones.data"
+                        showGridlines
+                        stripedRows
+                        tableStyle="min-width: 50rem"
+                        dataKey="id"
+                    >
+                        <Column class="text-center">
+                            <template #header>
+                                <div class="w-100">
+                                    Acciones
                                 </div>
-                            </td>
-                            <td class="text-center">
-                                <span class="badge badge-success">{{ cotizacion.status }}</span>
-                            </td>
-                            <td class="text-nowrap">
-                                <Link
-                                    tabIndex="1"
-                                    className="btn btn-small btn-outline-primary btn-floating ripple-surface"
-                                    as="button"
-                                    :href="route('ventas.cotizaciones.edit', cotizacion.id)"
-                                >
-                                    <MDBIcon icon="pencil"></MDBIcon>
-                                </Link>
+                            </template>
+                            <template #body="{data}">
+                                <div class="text-center">
+                                    <Link
+                                        tabIndex="1"
+                                        className="btn btn-small btn-outline-primary btn-floating ripple-surface"
+                                        as="button"
+                                        :href="route('ventas.cotizaciones.edit', data.id)"
+                                    >
+                                        <MDBIcon icon="pencil"></MDBIcon>
+                                    </Link>
 
-                                <MDBBtn outline="danger"
-                                    title="Eliminar"
-                                    size="small"
-                                    floating
-                                    @click="destroy(cotizacion)"
-                                >
-                                    <MDBIcon  icon="trash"></MDBIcon>
-                                </MDBBtn>
-                            </td>
-                        </tr>
-                    </tbody>
-                </MDBTable>
+                                    <MDBBtn outline="danger"
+                                        title="Eliminar"
+                                        size="small"
+                                        floating
+                                        @click="destroy(data)"
+                                    >
+                                        <MDBIcon  icon="trash"></MDBIcon>
+                                    </MDBBtn>
+                                </div>
+                            </template>
+                        </Column>
+
+                        <Column field="id" header="#" sortable>
+                        </Column>
+
+                        <Column field="status" header="Status">
+                        <template #body="{data}">
+                            <span
+                            class="badge"
+                            :class="'bg-success'"
+                            >
+                            {{ data.status }}
+                            </span>
+                        </template>
+                        </Column>
+
+                        <Column field="cliente.nombre" header="Cliente">
+                        </Column>
+
+                        <Column field="vendedor.name" header="Vendedor">
+                        </Column>
+
+                        <Column field="fecha" header="Fecha">
+                            <template #body="{data}">
+                                {{ data.fecha }}
+                            </template>
+                        </Column>
+
+                        <Column field="total" header="Total">
+                        <template #body="{data}">
+                            <div class="d-flex justify-content-between">
+                                <span>$</span>
+                                <span>{{ data.total }}</span>
+                            </div>
+                        </template>
+                        </Column>
 
 
-                <Pagination class="mt-6" :links="cotizaciones.links" />
+                    </DataTable>
 
-            </MDBCardBody>
+<!--
+                    <MDBTable align="middle" responsive border>
+                        <thead>
+                            <tr class="bg-primary text-white">
+                                <th scope="col">#</th>
+                                <th scope="col">CLIENTE</th>
+                                <th scope="col">VENDEDOR</th>
+                                <th scope="col">FECHA</th>
+                                <th scope="col">TOTAL</th>
+                                <th scope="col">STATUS</th>
+                                <th scope="col">ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-if="cotizaciones.data.length == 0">
+                                <td colspan="7" class="text-center text-muted"> Sin Registros</td>
+                            </tr>
+
+                            <tr v-if="cotizaciones.data.length > 0" v-for="cotizacion in cotizaciones.data" :key="cotizacion.id" class="text-uppercase">
+                                <td>{{ cotizacion.id }}</td>
+                                <td >
+                                    {{ cotizacion.cliente.nombre }}
+                                </td>
+                                <td>
+                                    {{ cotizacion.vendedor.name }}
+                                </td>
+                                <td class="text-center">
+                                    {{ cotizacion.fecha }}
+                                </td>
+
+                                <td>
+                                    <div class="d-flex justify-content-between">
+                                        <span>$</span>
+                                        <span>{{ cotizacion.total }}</span>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge badge-success">{{ cotizacion.status }}</span>
+                                </td>
+                                <td class="text-nowrap">
+                                    <Link
+                                        tabIndex="1"
+                                        className="btn btn-small btn-outline-primary btn-floating ripple-surface"
+                                        as="button"
+                                        :href="route('ventas.cotizaciones.edit', cotizacion.id)"
+                                    >
+                                        <MDBIcon icon="pencil"></MDBIcon>
+                                    </Link>
+
+                                    <MDBBtn outline="danger"
+                                        title="Eliminar"
+                                        size="small"
+                                        floating
+                                        @click="destroy(cotizacion)"
+                                    >
+                                        <MDBIcon  icon="trash"></MDBIcon>
+                                    </MDBBtn>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </MDBTable> -->
+
+
+                    <Pagination class="mt-6" :links="cotizaciones.links" />
+
+                </MDBCardBody>
             </MDBCard>
         </div>
     </AuthenticatedLayout>

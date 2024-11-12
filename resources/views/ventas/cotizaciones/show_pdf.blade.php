@@ -37,19 +37,19 @@
     <div class="margin-top">
         <table class="partidas">
             <tr>
-                <th>PARTIDA</th>
-                <th>CONCEPTO</th>
-                <th>CANTIDAD</th>
-                <th>PRECIO </th>
-                <th>TOTAL</th>
+                <th>#</th>
+                <th>Historia de usuario</th>
+                <th>Horas</th>
+                <th>Precio </th>
+                <th>Total</th>
             </tr>
-            @foreach($cotizacion->partidas as $partida)
+            @foreach($cotizacion->partidas->sortBy('posicion') as $partida)
                 <tr class="items">
                     <td>
                         {{ $partida->posicion }}
                     </td>
-                    <td>
-                        <div>
+                    <td >
+                        <div class="fw-bold">
                             {{ $partida->concepto }}
                         </div>
                         <div class="text-muted">
@@ -57,13 +57,14 @@
                         </div>
                     </td>
                     <td>
+
                         {{ $partida->cantidad}}
                     </td>
                     <td>
-                        {{ $partida->precio }}
+                        {{ number_format($partida->precio,2) }}
                     </td>
                     <td>
-                        {{ $partida->total }}
+                        {{ number_format($partida->total,2) }}
                     </td>
                 </tr>
             @endforeach

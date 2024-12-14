@@ -50,9 +50,9 @@ class CotizacionesController extends Controller
             'status'        => 'Nueva',
             'moneda'        => 'MXN',
             'saludo'        => 'Estimado(a)',
-            'descripcion'   => 'Le envío la cotización solicitada',
+            'descripcion'   => 'En atención a su solicitud ponemos a su disposición la siguiente cotización lo cual comprende lo siguiente:',
             'pie'           => 'Esperando que sea de su agrado quedo pendiente ante cualquier duda o comentario',
-            'observaciones' => 'Se entrega el 50% de anticipo',
+            'observaciones' => 'Esta es una estimación. Cualquier tarea que tenga algún costo adicional se notificará a parte',
             'tipo_cambio'   => 0,
         ]);
 

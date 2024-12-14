@@ -55,6 +55,7 @@ const modalEditarConcepto = ref(false);
 const dropdownOptions = ref(false)
 
 const selectIdCliente = ref();
+
 const optionClientes = ref([]);
 
 const isLoadingSelectCliente = ref(false);
@@ -87,7 +88,7 @@ const formAjusteCotizacion = useForm({
     observaciones:props.cotizacion.observaciones,
     pie:props.cotizacion.pie,
     nombre: props.cotizacion.nombre,
-    fecha: moment(props.cotizacion).format('DD/MM/YYYY')
+    fecha: moment(props.cotizacion.fecha).format('DD/MM/YYYY')
 });
 
 const formChangeClient = useForm({
@@ -361,8 +362,9 @@ const evtClickEnviarCotizacion = async () => {
                         </div>
                     </div>
 
-                    <p>
+                    <p class="p-0 m-0">
                         <span>{{ cotizacion.saludo }}</span> <span class="text-capitalize fw-bolder">{{ cotizacion?.cliente?.nombre }}</span>
+
 
                         <i
                           class="fas fa-edit ms-2"
@@ -371,6 +373,8 @@ const evtClickEnviarCotizacion = async () => {
                           @click="evtCambiarDestinatario"
                           ></i>
                     </p>
+
+                    <p >{{ cotizacion.cliente.email }}</p>
 
                     <p>
                         {{ cotizacion.descripcion }}

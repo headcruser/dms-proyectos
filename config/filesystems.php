@@ -38,7 +38,7 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path("app".DIRECTORY_SEPARATOR ."public"),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
